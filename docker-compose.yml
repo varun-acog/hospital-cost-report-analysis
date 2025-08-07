@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  hospital-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hospital-cost-analysis
+    labels:
+      - "description=Hospital Cost Analysis application using Docker Compose."
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - hospital-network
+
+networks:
+  hospital-network:
+    driver: bridge
+
+volumes:
+  hospital-data:
+    driver: local
